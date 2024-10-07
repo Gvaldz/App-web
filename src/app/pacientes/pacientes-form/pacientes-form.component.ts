@@ -10,12 +10,18 @@ import { PacientesService } from '../pacientes.service';
 export class PacientesFormComponent {
 
   pacienteTemp: IUpacientes = {
+    id: this.generateUniqueId(),
     nombre: '',
     edad: 0,
     peso: 0,
     estatura: 0,
     telefono: 0
   };
+
+  generateUniqueId(): string {
+    return Math.random().toString(36).substr(2, 9);
+  }
+
   isEditMode = false;  
 
   constructor(private pacienteService: PacientesService) {}
@@ -33,7 +39,7 @@ export class PacientesFormComponent {
 
   onSubmit() {
     if (this.isEditMode) {
-      const index = this.pacienteService.getPacientes().findIndex(d => d.nombre === this.pacienteTemp.nombre);
+      const index = this.pacienteService.getPacientes().findIndex(d => d.id === this.pacienteTemp.id);
       if (index > -1) {
         this.pacienteService.updatePaciente(index, this.pacienteTemp); 
       }
@@ -45,7 +51,7 @@ export class PacientesFormComponent {
   }
 
   resetForm(): void {
-    this.pacienteTemp = {    nombre: '', edad: 0, peso: 0, estatura: 0, telefono: 0};
+    this.pacienteTemp = {id :'', nombre: '', edad: 0, peso: 0, estatura: 0, telefono: 0};
     this.isEditMode = false;
   }
 

@@ -10,11 +10,16 @@ import { CitasService } from '../citas.service';
 export class CitasFormComponent implements OnInit {
 
   citasTemp: citas = {
+    id: this.generateUniqueId(),
     doctor: '',
     paciente: '',
     fecha: '',   
     hora: ''            
   };
+
+  generateUniqueId(): string {
+    return Math.random().toString(36).substr(2, 9);
+  }
 
   isEditMode = false;  
 
@@ -33,7 +38,7 @@ export class CitasFormComponent implements OnInit {
 
   onSubmit() {
     if (this.isEditMode) {
-      const index = this.citasService.getCitas().findIndex(c => c.doctor === this.citasTemp.doctor);
+      const index = this.citasService.getCitas().findIndex(d => d.id === this.citasTemp.id);  
       if (index > -1) {
         this.citasService.updateCita(index, this.citasTemp); 
       }
@@ -43,9 +48,11 @@ export class CitasFormComponent implements OnInit {
     }
     this.resetForm();  
   }
+  
 
   resetForm(): void {
     this.citasTemp = {
+      id: '',
       doctor: '',
       paciente: '',
       fecha: '',  

@@ -8,17 +8,4 @@ import { DoctoresSeviceService } from '../doctores-sevice.service';
   styleUrl: './doctores-dashboard.component.css'
 })
 export class DoctoresDashboardComponent {
-  doctor: IUdoctores = {
-    nombre: '',
-    especialidad: '',
-    cedula: 0,
-    telefono: 0,
-    correo: ''
-  };
-
-  constructor(private doctorService: DoctoresSeviceService) {}
-
-  saveDoctor() {
-    this.doctorService.addDoctor(this.doctor);
-  }
 }

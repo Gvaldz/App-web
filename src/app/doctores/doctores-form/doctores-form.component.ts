@@ -12,6 +12,7 @@ import { DoctoresSeviceService } from '../doctores-sevice.service';
 export class DoctoresFormComponent implements OnInit {
 
   doctorTemp: IUdoctores = {
+    id: this.generateUniqueId(),
     nombre: '',
     especialidad: '',
     cedula: 0,
@@ -19,6 +20,10 @@ export class DoctoresFormComponent implements OnInit {
     correo: ''
   };
   isEditMode = false;  
+
+  generateUniqueId(): string {
+    return Math.random().toString(36).substr(2, 9);
+  }
 
   constructor(private doctorService: DoctoresSeviceService) {}
 
@@ -35,7 +40,7 @@ export class DoctoresFormComponent implements OnInit {
 
   onSubmit() {
     if (this.isEditMode) {
-      const index = this.doctorService.getDoctors().findIndex(d => d.nombre === this.doctorTemp.nombre);
+      const index = this.doctorService.getDoctors().findIndex(d => d.id === this.doctorTemp.id);
       if (index > -1) {
         this.doctorService.updateDoctor(index, this.doctorTemp); 
       }
@@ -47,7 +52,7 @@ export class DoctoresFormComponent implements OnInit {
   }
 
   resetForm(): void {
-    this.doctorTemp = { nombre: '', especialidad: '', cedula: 0, telefono: 0, correo: '' };
+    this.doctorTemp = {id: '', nombre: '', especialidad: '', cedula: 0, telefono: 0, correo: '' };
     this.isEditMode = false;
   }
 }
