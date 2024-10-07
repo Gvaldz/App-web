@@ -1,0 +1,29 @@
+.buttons{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    margin: 0px;
+    top: 0;
+    border-bottom: 1px #ccc;
+}
+
+button{
+    font-family: "Inter", sans-serif;
+    text-align: center;
+    font-size: large;
+    width: 12%;
+    border-radius: 5px;
+    border: 0;
+    height: 100%;
+    background-color: #ffffff;
+}
+
+button:hover{
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    text-align: center;
+    font-size: large;
+    color: white;
+    background-color: #0ab6d8;
+}

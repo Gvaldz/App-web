@@ -1,0 +1,48 @@
+<form (ngSubmit)="onSubmit()" #doctorform="ngForm">
+  <h3>Formulario para doctores</h3>
+  <app-field
+    label="Nombre"
+    placeholder="Ingrese su nombre"
+    type="text"
+    name="nombre"
+    [(ngModel)]="doctorTemp.nombre"
+    required
+  ></app-field>
+
+  <app-field
+    label="Especialidad"
+    placeholder="Ingrese su especialidad"
+    type="text"
+    name="especialidad"
+    [(ngModel)]="doctorTemp.especialidad"
+    required
+  ></app-field>
+
+  <app-field
+    label="Cédula"
+    placeholder="Ingrese su cédula"
+    type="number"
+    name="cedula"
+    [(ngModel)]="doctorTemp.cedula"
+    required
+  ></app-field>
+
+  <app-field
+    label="Teléfono"
+    placeholder="Ingrese su teléfono"
+    type="tel"
+    name="telefono"
+    [(ngModel)]="doctorTemp.telefono"
+    required
+  ></app-field>
+
+  <app-field
+    label="Correo"
+    placeholder="Ingrese su correo"
+    type="email"
+    name="correo"
+    [(ngModel)]="doctorTemp.correo"
+    required
+  ></app-field>
+  <app-button-save></app-button-save>
+</form>

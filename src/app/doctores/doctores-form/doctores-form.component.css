@@ -1,0 +1,13 @@
+form{
+    width: 100%;
+    background-color: rgb(235, 235, 235);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+h3{
+    font-family: Tahoma, sans-serif;
+    text-align: center;
+}

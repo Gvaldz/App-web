@@ -1,0 +1,38 @@
+<form (ngSubmit)="onSubmit()" #citasForm="ngForm">
+    <app-field
+      label="Doctor"
+      placeholder="Ingrese el nombre del doctor"
+      type="text"
+      name="doctor"
+      [(ngModel)]="citasTemp.doctor"
+      required
+    ></app-field>
+  
+    <app-field
+      label="Paciente"
+      placeholder="Ingrese el nombre del paciente"
+      type="text"
+      name="paciente"
+      [(ngModel)]="citasTemp.paciente"
+      required
+    ></app-field>
+  
+    <app-field
+      label="Fecha"
+      type="date" 
+      name="fecha"
+      [(ngModel)]="citasTemp.fecha"
+      required
+    ></app-field>
+  
+    <app-field
+      label="Hora"
+      type="time"  
+      name="hora"
+      [(ngModel)]="citasTemp.hora"
+      required
+    ></app-field>
+  
+    <app-button-save></app-button-save> 
+  </form>
+  

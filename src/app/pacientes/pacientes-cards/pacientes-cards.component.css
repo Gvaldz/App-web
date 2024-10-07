@@ -1,0 +1,48 @@
+.card{
+    width: 44%;
+    background-color: rgb(223, 223, 223);
+    margin-bottom: 15px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: space-around;
+}
+
+#information{
+    width: 90%;
+}
+
+#buttons{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin: 10px;
+}
+
+button{
+    width: 20%;
+    font-family: "Inter", sans-serif;
+    color: white;
+    text-align: center;
+    font-size: large;
+    width: 25%;
+    border-radius: 5px;
+    border: 0;
+    height: 40px;
+    background-color: #487cff;
+}
+
+button:hover{
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    text-align: center;
+    font-size: large;
+    color: white;
+    background-color: #006de2;
+}
+
+h2{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}

@@ -1,0 +1,14 @@
+.dashboard{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+
+app-pacientes-form{
+    width: 35%;
+}
+
+app-pacientes-cards-section{
+    width: 60%;
+}
