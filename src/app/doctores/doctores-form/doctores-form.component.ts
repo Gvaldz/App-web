@@ -5,54 +5,76 @@ import { DoctoresSeviceService } from '../doctores-sevice.service';
 @Component({
   selector: 'app-doctores-form',
   templateUrl: './doctores-form.component.html',
-  styleUrl: './doctores-form.component.css'
+  styleUrls: ['./doctores-form.component.css']
 })
-
-
 export class DoctoresFormComponent implements OnInit {
-
   doctorTemp: IUdoctores = {
-    id: this.generateUniqueId(),
-    nombre: '',
+    idDoctores: 0,
+    nombres: '',
+    apellidos: '',
     especialidad: '',
-    cedula: 0,
-    telefono: 0,
+    cedula: null,
+    horario: '',
+    telefono: null,
     correo: ''
   };
-  isEditMode = false;  
+  isEditMode = false;
+  isFormValid: boolean = true;
 
-  generateUniqueId(): string {
-    return Math.random().toString(36).substr(2, 9);
-  }
+  especialidades: string[] = [];
+  horarios: string[] = ['Matutino', 'Vespertino'];
 
   constructor(private doctorService: DoctoresSeviceService) {}
 
   ngOnInit(): void {
+    this.doctorService.getEspecialidades().subscribe((data) => {
+      this.especialidades = data.map((item: { Especialidad: string }) => item.Especialidad);
+    });
+
     this.doctorService.selectedDoctor$.subscribe((doctor) => {
       if (doctor) {
-        this.doctorTemp = { ...doctor };  
-        this.isEditMode = true;  
+        this.doctorTemp = { ...doctor };
+        this.isEditMode = true;
       } else {
-        this.resetForm(); 
+        this.resetForm();
       }
     });
   }
 
   onSubmit() {
-    if (this.isEditMode) {
-      const index = this.doctorService.getDoctors().findIndex(d => d.id === this.doctorTemp.id);
-      if (index > -1) {
-        this.doctorService.updateDoctor(index, this.doctorTemp); 
+    if (this.validateForm()) {
+      if (this.isEditMode) {
+        this.doctorService.updateDoctor(this.doctorTemp.idDoctores, this.doctorTemp).subscribe(() => {
+          this.resetForm();
+        });
+        this.isEditMode = false;
+      } else {
+        this.doctorService.addDoctor(this.doctorTemp).subscribe(() => {
+          this.resetForm();
+        });
       }
-      this.isEditMode = false;
     } else {
-      this.doctorService.addDoctor(this.doctorTemp); 
+      alert('Por favor completa todos los campos correctamente.');
     }
-    this.resetForm(); 
+  }
+
+  validateForm(): boolean {
+    const isCedulaValid = this.doctorTemp.cedula && String(this.doctorTemp.cedula).length <= 10;
+    return this.doctorTemp.nombres !== '' && this.doctorTemp.apellidos !== '' && 
+           this.doctorTemp.especialidad !== '' && isCedulaValid;
   }
 
   resetForm(): void {
-    this.doctorTemp = {id: '', nombre: '', especialidad: '', cedula: 0, telefono: 0, correo: '' };
+    this.doctorTemp = {
+      idDoctores: 0,
+      nombres: '',
+      apellidos: '',
+      especialidad: '',
+      cedula: null,
+      horario: '',
+      telefono: null,
+      correo: ''
+    };
     this.isEditMode = false;
   }
 }

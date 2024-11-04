@@ -3,30 +3,36 @@ import { citas } from '../iucitas';
 import { CitasService } from '../citas.service';
 
 @Component({
-  selector: 'app-citas-card',
+  selector: 'citas-card',
   templateUrl: './citas-card.component.html',
-  styleUrl: './citas-card.component.css'
+  styleUrls: ['./citas-card.component.css']
 })
 export class CitasCardComponent implements OnInit {
-
   citas: citas[] = [];
 
   constructor(private citasService: CitasService) {}
 
   ngOnInit(): void {
-    this.citas = this.citasService.getCitas();
-  }
+    this.citasService.citas$.subscribe(data => {
+      this.citas = data; 
+    });
+  }  
 
   deleteCita(cita: citas): void {
-    const index = this.citas.indexOf(cita);
-    if (index > -1) {
-      this.citasService.deleteCita(index);
-      this.citas = this.citasService.getCitas(); 
+    if (cita.idcitas) {
+      this.citasService.deleteCitas(cita.idcitas).subscribe({
+        next: () => {
+        },
+        error: (err) => {
+          console.error("Error al eliminar cita", err);
+        }
+      });
+    } else {
+      console.error("ID de cita no definido");
     }
   }
-
+  
   updateCita(cita: citas): void {
-    this.citasService.selectCitaForEdit(cita);
+    this.citasService.selectCitaForEdit(cita); 
   }
-
 }

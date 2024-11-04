@@ -1,13 +1,13 @@
-<div *ngFor="let pacientes of pacientes" class="card">
+<div *ngFor="let paciente of pacientes" class="card">
     <div id="information">
-        <h3>Nombre: {{pacientes.nombre}}</h3>
-        <p>Edad: {{pacientes.edad}} años</p>
-        <p>Peso: {{pacientes.peso}} kg</p>
-        <p>Estatura: {{pacientes.estatura}} m</p>
-        <p>Número teléfonico: {{pacientes.telefono}}</p>
+        <h3>Nombre: {{paciente.nombres}} {{paciente.apellidos}}</h3>
+        <p>Fecha de nacimiento: {{ paciente.nacimiento | date:'longDate' }}</p>
+        <p>Peso: {{paciente.peso}} kg</p>
+        <p>Estatura: {{paciente.estatura}} m</p>
+        <p>Número teléfonico: {{paciente.telefono}}</p>
     </div>
     <div id="buttons">
-        <button id="Editar" (click)="updatePaciente(pacientes)">Editar</button>
-        <button id="Eliminar" (click)="deletePaciente(pacientes)">Eliminar</button>
+        <button id="Editar" (click)="updatePaciente(paciente)">Editar</button>
+        <button id="Eliminar" (click)="deletePaciente(paciente)">Eliminar</button>
     </div>
 </div>

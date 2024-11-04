@@ -1,28 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IUpacientes } from '../iupacientes';
 import { PacientesService } from '../pacientes.service';
 
 @Component({
   selector: 'app-pacientes-cards',
   templateUrl: './pacientes-cards.component.html',
-  styleUrl: './pacientes-cards.component.css'
+  styleUrls: ['./pacientes-cards.component.css']
 })
-export class PacientesCardsComponent {
-
+export class PacientesCardsComponent implements OnInit {
   pacientes: IUpacientes[] = [];
 
   constructor(private pacienteService: PacientesService) {}
 
   ngOnInit(): void {
-    this.pacientes = this.pacienteService.getPacientes();
+    this.pacienteService.pacientes$.subscribe(data => {
+      this.pacientes = data;
+    });
   }
 
   deletePaciente(paciente: IUpacientes): void {
-    const index = this.pacientes.indexOf(paciente);
-    if (index > -1) {
-      this.pacienteService.deletePaciente(index);
-      this.pacientes = this.pacienteService.getPacientes(); 
-    }
+    this.pacienteService.deletePaciente(paciente.idPacientes).subscribe();
   }
 
   updatePaciente(paciente: IUpacientes): void {

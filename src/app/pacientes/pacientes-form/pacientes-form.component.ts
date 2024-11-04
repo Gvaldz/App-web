@@ -1,58 +1,72 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IUpacientes } from '../iupacientes';
 import { PacientesService } from '../pacientes.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-pacientes-form',
   templateUrl: './pacientes-form.component.html',
-  styleUrl: './pacientes-form.component.css'
+  styleUrls: ['./pacientes-form.component.css'],
+  providers: [DatePipe]
 })
-export class PacientesFormComponent {
-
+export class PacientesFormComponent implements OnInit {
   pacienteTemp: IUpacientes = {
-    id: this.generateUniqueId(),
-    nombre: '',
-    edad: 0,
-    peso: 0,
-    estatura: 0,
-    telefono: 0
+    idPacientes: 0,
+    nombres: '',
+    apellidos: '',
+    nacimiento: null,
+    peso: null,
+    estatura: null,
+    telefono: null
   };
 
-  generateUniqueId(): string {
-    return Math.random().toString(36).substr(2, 9);
-  }
+  isEditMode = false;
+  isFormValid: boolean = true;
 
-  isEditMode = false;  
-
-  constructor(private pacienteService: PacientesService) {}
+  constructor(
+    private pacienteService: PacientesService,
+    private datePipe: DatePipe
+  ) {}
 
   ngOnInit(): void {
     this.pacienteService.selectedpaciente$.subscribe((paciente) => {
       if (paciente) {
-        this.pacienteTemp = { ...paciente };  
-        this.isEditMode = true;  
+        this.pacienteTemp = { ...paciente };
+        this.isEditMode = true;
       } else {
-        this.resetForm(); 
+        this.resetForm();
       }
     });
   }
 
   onSubmit() {
-    if (this.isEditMode) {
-      const index = this.pacienteService.getPacientes().findIndex(d => d.id === this.pacienteTemp.id);
-      if (index > -1) {
-        this.pacienteService.updatePaciente(index, this.pacienteTemp); 
+    if (this.validateForm()) {
+      this.pacienteTemp.nacimiento = this.datePipe.transform(this.pacienteTemp.nacimiento, 'yyyy-MM-dd') as string;
+
+      if (this.isEditMode) {
+        this.pacienteService.updatePaciente(this.pacienteTemp.idPacientes, this.pacienteTemp).subscribe(() => {
+          this.resetForm();
+        });
+        this.isEditMode = false;
+      } else {
+        this.pacienteService.addPaciente(this.pacienteTemp).subscribe(() => {
+          this.resetForm();
+        });
       }
-      this.isEditMode = false;
     } else {
-      this.pacienteService.addPaciente(this.pacienteTemp); 
+      alert('Por favor completa todos los campos correctamente.');
     }
-    this.resetForm(); 
+  }
+
+  validateForm(): boolean {
+    return this.pacienteTemp.nombres !== '' && this.pacienteTemp.apellidos !== '' &&
+           this.pacienteTemp.nacimiento !== null && this.pacienteTemp.peso >= 0 && 
+           this.pacienteTemp.estatura >= 0 && 
+           this.pacienteTemp.telefono && String(this.pacienteTemp.telefono).length === 10;
   }
 
   resetForm(): void {
-    this.pacienteTemp = {id :'', nombre: '', edad: 0, peso: 0, estatura: 0, telefono: 0};
+    this.pacienteTemp = { idPacientes: 0 ,nombres: '', apellidos: '', nacimiento: null, peso: null, estatura: null, telefono: null };
     this.isEditMode = false;
   }
-
 }

@@ -1,20 +1,21 @@
 <form (ngSubmit)="onSubmit()" #doctorform="ngForm">
   <h3>Formulario para doctores</h3>
+  
   <app-field
-    label="Nombre"
-    placeholder="Ingrese su nombre"
+    label="Nombres"
+    placeholder="Ingrese sus nombres"
     type="text"
     name="nombre"
-    [(ngModel)]="doctorTemp.nombre"
+    [(ngModel)]="doctorTemp.nombres"
     required
   ></app-field>
-
+  
   <app-field
-    label="Especialidad"
-    placeholder="Ingrese su especialidad"
+    label="Apellidos"
+    placeholder="Ingrese sus apellidos"
     type="text"
-    name="especialidad"
-    [(ngModel)]="doctorTemp.especialidad"
+    name="apellidos"
+    [(ngModel)]="doctorTemp.apellidos"
     required
   ></app-field>
 
@@ -26,6 +27,20 @@
     [(ngModel)]="doctorTemp.cedula"
     required
   ></app-field>
+  
+  <div class="select">
+    <label for="especialidad">Especialidad</label>
+    <select name="especialidad" [(ngModel)]="doctorTemp.especialidad" required>
+      <option *ngFor="let especialidad of especialidades" [value]="especialidad">{{ especialidad }}</option>
+    </select>
+  </div>
+
+  <div class="select">
+    <label for="horario">Horario</label>
+    <select name="horario" [(ngModel)]="doctorTemp.horario" required>
+      <option *ngFor="let horario of horarios" [value]="horario">{{ horario }}</option>
+    </select>
+  </div>
 
   <app-field
     label="Teléfono"
@@ -44,5 +59,6 @@
     [(ngModel)]="doctorTemp.correo"
     required
   ></app-field>
+  
   <app-button-save></app-button-save>
 </form>

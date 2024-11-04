@@ -8,21 +8,18 @@ import { IUdoctores } from '../iudoctores';
   styleUrls: ['./cards-doctores.component.css']
 })
 export class CardsDoctoresComponent implements OnInit {
-
   doctores: IUdoctores[] = [];
 
   constructor(private doctorService: DoctoresSeviceService) {}
 
   ngOnInit(): void {
-    this.doctores = this.doctorService.getDoctors();
+    this.doctorService.doctores$.subscribe(data => {
+      this.doctores = data;
+    });
   }
 
   deleteDoctor(doctor: IUdoctores): void {
-    const index = this.doctores.indexOf(doctor);
-    if (index > -1) {
-      this.doctorService.deleteDoctor(index);
-      this.doctores = this.doctorService.getDoctors(); 
-    }
+    this.doctorService.deleteDoctor(doctor.idDoctores).subscribe();
   }
 
   updateDoctor(doctor: IUdoctores): void {

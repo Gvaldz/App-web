@@ -1,42 +1,57 @@
 import { Injectable } from '@angular/core';
 import { IUpacientes } from './iupacientes';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PacientesService {
+  private apiUrl = 'http://54.173.131.38:8080/api/pacientes';
+  private selectedpaciente = new BehaviorSubject<IUpacientes | null>(null);
+  selectedpaciente$ = this.selectedpaciente.asObservable();
+  private pacientesSubject = new BehaviorSubject<IUpacientes[]>([]);
+  pacientes$ = this.pacientesSubject.asObservable(); 
 
-  private pacientes: IUpacientes[] = []
-
-
-  private selectedpacienteSubject = new BehaviorSubject<IUpacientes | null>(null);
-  selectedpaciente$ = this.selectedpacienteSubject.asObservable();  
-
-  constructor() {}
-
-  addPaciente(paciente: IUpacientes): void {
-    this.pacientes.push(paciente);
-    console.log(paciente);
+  constructor(private http: HttpClient) {
+    this.loadPacientes(); 
   }
 
-  getPacientes(): IUpacientes[] {
-    return this.pacientes;
+  private loadPacientes() {
+    this.getPacientes().subscribe(data => {
+      this.pacientesSubject.next(data);
+    });
   }
 
-  updatePaciente(index: number, paciente: IUpacientes): void {
-    this.pacientes[index] = paciente;
+  getPacientes(): Observable<IUpacientes[]> {
+    return this.http.get<IUpacientes[]>(this.apiUrl);
   }
 
-  deletePaciente(index: number): void {
-    this.pacientes.splice(index, 1);
+  addPaciente(paciente: IUpacientes): Observable<IUpacientes> {
+    return this.http.post<IUpacientes>(this.apiUrl, paciente).pipe(
+      tap(() => {
+        this.loadPacientes(); 
+      })
+    );
+  }
+  
+  updatePaciente(id: number, paciente: IUpacientes): Observable<IUpacientes> {
+    return this.http.put<IUpacientes>(`${this.apiUrl}/${id}`, paciente).pipe(
+      tap(() => {
+        this.loadPacientes(); 
+      })
+    );
   }
 
-  selectPacienteForEdit(paciente: IUpacientes): void {
-    this.selectedpacienteSubject.next(paciente);  
+  deletePaciente(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`).pipe(
+      tap(() => {
+        this.pacientesSubject.next(this.pacientesSubject.getValue().filter(p => p.idPacientes !== id));
+      })
+    );
   }
 
-  clearSelectedPaciente(): void {
-    this.selectedpacienteSubject.next(null);  
+  selectPacienteForEdit(paciente: IUpacientes) {
+    this.selectedpaciente.next(paciente);
   }
 }

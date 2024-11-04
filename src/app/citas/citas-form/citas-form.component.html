@@ -1,38 +1,26 @@
-<form (ngSubmit)="onSubmit()" #citasForm="ngForm">
-    <app-field
-      label="Doctor"
-      placeholder="Ingrese el nombre del doctor"
-      type="text"
-      name="doctor"
-      [(ngModel)]="citasTemp.doctor"
-      required
-    ></app-field>
-  
-    <app-field
-      label="Paciente"
-      placeholder="Ingrese el nombre del paciente"
-      type="text"
-      name="paciente"
-      [(ngModel)]="citasTemp.paciente"
-      required
-    ></app-field>
-  
-    <app-field
-      label="Fecha"
-      type="date" 
-      name="fecha"
-      [(ngModel)]="citasTemp.fecha"
-      required
-    ></app-field>
-  
-    <app-field
-      label="Hora"
-      type="time"  
-      name="hora"
-      [(ngModel)]="citasTemp.hora"
-      required
-    ></app-field>
-  
-    <app-button-save></app-button-save> 
-  </form>
-  
+<form (ngSubmit)="onSubmit()">
+  <h3>Formulario de Citas</h3>
+
+  <div class="select">
+    <label for="doctor">Doctor</label>
+    <select [(ngModel)]="citaTemp.iddoctor" name="iddoctor" required>
+      <option *ngFor="let doctor of doctores" [value]="doctor.idDoctores">
+        {{ doctor.nombres }} {{ doctor.apellidos }}
+      </option>
+    </select>
+  </div>
+
+  <div class="select">
+    <label for="paciente">Paciente</label>
+    <select [(ngModel)]="citaTemp.idpaciente" name="idpaciente" required>
+      <option *ngFor="let paciente of pacientes" [value]="paciente.idPacientes">
+        {{ paciente.nombres }} {{ paciente.apellidos }}
+      </option>
+    </select>
+  </div>
+
+  <app-field label="Fecha" placeholder="Ingrese la fecha" type="date" name="fecha" [(ngModel)]="citaTemp.fecha" required></app-field>
+  <app-field label="Hora" placeholder="Ingrese la hora" type="time" name="hora" [(ngModel)]="citaTemp.hora" required></app-field>
+
+  <app-button-save></app-button-save>
+</form>

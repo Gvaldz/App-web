@@ -1,0 +1,16 @@
+h2{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+}
+
+p{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+}
+
+div{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

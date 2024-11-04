@@ -3,14 +3,22 @@ import { CommonModule } from '@angular/common';
 import { PacientesFormComponent } from './pacientes-form/pacientes-form.component';
 import { PacientesCardsComponent } from './pacientes-cards/pacientes-cards.component';
 import { PacientesCardsSectionComponent } from './pacientes-cards-section/pacientes-cards-section.component';
-
-
+import { SharedModule } from '../shared/shared.module';
+import { PacientesDashboardComponent } from './pacientes-dashboard/pacientes-dashboard.component';
+import { FormsModule } from '@angular/forms'; 
+import { HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
+    PacientesCardsComponent,
+    PacientesCardsSectionComponent,
+    PacientesDashboardComponent,
+    PacientesFormComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    SharedModule,
   ]
 })
-export class PacientesModule { }
+export default class PacientesModule { }

@@ -1,8 +1,10 @@
 export interface IUdoctores {
-    id : string
-    nombre : string,
+    idDoctores : number
+    nombres : string,
+    apellidos : string,
     especialidad : string,
-    cedula : number,
-    telefono : number,
+    cedula : any,
+    horario : string,
+    telefono : any,
     correo : string
 }

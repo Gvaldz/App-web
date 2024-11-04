@@ -1,12 +1,12 @@
 <div *ngFor="let cita of citas" class="card">
-    <div id="information">
-        <p>Doctor: {{cita.doctor}}</p>
-        <p>Paciente: {{cita.paciente}}</p>
-        <p>Fecha: {{cita.fecha}}</p>
-        <p>Hora: {{cita.hora}}</p>
-    </div>
-    <div id="buttons">
-        <button id="Editar" (click)="updateCita(cita)">Editar</button>
-        <button id="Eliminar" (click)="deleteCita(cita)">Eliminar</button>
-    </div>
+  <div id="information">
+    <p>Doctor: {{ cita.doctor_nombre }} {{ cita.doctor_apellido }}</p>
+    <p>Paciente: {{ cita.paciente_nombre }} {{ cita.paciente_apellido }}</p>
+    <p>Fecha: {{ cita.fecha | date:'longDate' }}</p>
+    <p>Hora: {{ cita.hora }}</p>
+  </div>
+  <div id="buttons">
+    <button id="Editar" (click)="updateCita(cita)">Editar</button>
+    <button id="Eliminar" (click)="deleteCita(cita)">Eliminar</button>
+  </div>
 </div>

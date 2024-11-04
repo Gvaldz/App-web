@@ -1,7 +1,29 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import DoctoresDashboardComponent from './doctores/doctores-dashboard/doctores-dashboard.component';
+import { HomeComponent } from './shared/home/home.component';
+import { PacientesDashboardComponent } from './pacientes/pacientes-dashboard/pacientes-dashboard.component';
+import { CitasDashboardComponent } from './citas/citas-dashboard/citas-dashboard.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+
+  { path: '',
+    component: HomeComponent    
+  },
+  {
+    path: 'doctores',
+    component: DoctoresDashboardComponent
+  },
+  {
+    path: 'pacientes',
+    component: PacientesDashboardComponent
+  },
+  {
+    path: 'citas',
+    component: CitasDashboardComponent
+  }
+
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

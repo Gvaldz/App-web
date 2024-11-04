@@ -11,3 +11,26 @@ h3{
     font-family: Tahoma, sans-serif;
     text-align: center;
 }
+
+.select{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 8px;
+}
+
+select{
+    width: 90%;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: medium;
+}
+
+label{
+    width: 90%;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 4px;
+}
