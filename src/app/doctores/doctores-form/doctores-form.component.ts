@@ -9,27 +9,20 @@ import { DoctoresSeviceService } from '../doctores-sevice.service';
 })
 export class DoctoresFormComponent implements OnInit {
   doctorTemp: IUdoctores = {
-    idDoctores: 0,
-    nombres: '',
-    apellidos: '',
-    especialidad: '',
-    cedula: null,
-    horario: '',
-    telefono: null,
-    correo: ''
+    IdDoctores: 0,
+    Nombres: '',
+    Apellidos: '',
+    Especialidad: '',
+    Cedula: null,
   };
   isEditMode = false;
   isFormValid: boolean = true;
 
-  especialidades: string[] = [];
-  horarios: string[] = ['Matutino', 'Vespertino'];
+  especialidades: string[] = ['Cardiología', 'Pediatría', 'Dermatología', 'Neurología'];
 
   constructor(private doctorService: DoctoresSeviceService) {}
 
   ngOnInit(): void {
-    this.doctorService.getEspecialidades().subscribe((data) => {
-      this.especialidades = data.map((item: { Especialidad: string }) => item.Especialidad);
-    });
 
     this.doctorService.selectedDoctor$.subscribe((doctor) => {
       if (doctor) {
@@ -43,8 +36,10 @@ export class DoctoresFormComponent implements OnInit {
 
   onSubmit() {
     if (this.validateForm()) {
+      this.doctorTemp.Cedula = Number(this.doctorTemp.Cedula);
+  
       if (this.isEditMode) {
-        this.doctorService.updateDoctor(this.doctorTemp.idDoctores, this.doctorTemp).subscribe(() => {
+        this.doctorService.updateDoctor(this.doctorTemp.IdDoctores, this.doctorTemp).subscribe(() => {
           this.resetForm();
         });
         this.isEditMode = false;
@@ -57,23 +52,21 @@ export class DoctoresFormComponent implements OnInit {
       alert('Por favor completa todos los campos correctamente.');
     }
   }
+  
 
   validateForm(): boolean {
-    const isCedulaValid = this.doctorTemp.cedula && String(this.doctorTemp.cedula).length <= 10;
-    return this.doctorTemp.nombres !== '' && this.doctorTemp.apellidos !== '' && 
-           this.doctorTemp.especialidad !== '' && isCedulaValid;
+    const isCedulaValid = this.doctorTemp.Cedula && String(this.doctorTemp.Cedula).length <= 10;
+    return this.doctorTemp.Nombres !== '' && this.doctorTemp.Apellidos !== '' && 
+           this.doctorTemp.Especialidad !== '' && isCedulaValid;
   }
 
   resetForm(): void {
     this.doctorTemp = {
-      idDoctores: 0,
-      nombres: '',
-      apellidos: '',
-      especialidad: '',
-      cedula: null,
-      horario: '',
-      telefono: null,
-      correo: ''
+      IdDoctores: 0,
+      Nombres: '',
+      Apellidos: '',
+      Especialidad: '',
+      Cedula: null,
     };
     this.isEditMode = false;
   }

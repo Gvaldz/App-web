@@ -6,7 +6,7 @@
     placeholder="Ingrese sus nombres"
     type="text"
     name="nombre"
-    [(ngModel)]="doctorTemp.nombres"
+    [(ngModel)]="doctorTemp.Nombres"
     required
   ></app-field>
   
@@ -15,7 +15,7 @@
     placeholder="Ingrese sus apellidos"
     type="text"
     name="apellidos"
-    [(ngModel)]="doctorTemp.apellidos"
+    [(ngModel)]="doctorTemp.Apellidos"
     required
   ></app-field>
 
@@ -24,41 +24,16 @@
     placeholder="Ingrese su cédula"
     type="number"
     name="cedula"
-    [(ngModel)]="doctorTemp.cedula"
+    [(ngModel)]="doctorTemp.Cedula"
     required
   ></app-field>
   
   <div class="select">
     <label for="especialidad">Especialidad</label>
-    <select name="especialidad" [(ngModel)]="doctorTemp.especialidad" required>
+    <select name="especialidad" [(ngModel)]="doctorTemp.Especialidad" required>
       <option *ngFor="let especialidad of especialidades" [value]="especialidad">{{ especialidad }}</option>
     </select>
   </div>
-
-  <div class="select">
-    <label for="horario">Horario</label>
-    <select name="horario" [(ngModel)]="doctorTemp.horario" required>
-      <option *ngFor="let horario of horarios" [value]="horario">{{ horario }}</option>
-    </select>
-  </div>
-
-  <app-field
-    label="Teléfono"
-    placeholder="Ingrese su teléfono"
-    type="tel"
-    name="telefono"
-    [(ngModel)]="doctorTemp.telefono"
-    required
-  ></app-field>
-
-  <app-field
-    label="Correo"
-    placeholder="Ingrese su correo"
-    type="email"
-    name="correo"
-    [(ngModel)]="doctorTemp.correo"
-    required
-  ></app-field>
   
   <app-button-save></app-button-save>
 </form>

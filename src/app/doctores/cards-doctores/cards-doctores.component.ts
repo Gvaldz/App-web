@@ -19,7 +19,7 @@ export class CardsDoctoresComponent implements OnInit {
   }
 
   deleteDoctor(doctor: IUdoctores): void {
-    this.doctorService.deleteDoctor(doctor.idDoctores).subscribe();
+    this.doctorService.deleteDoctor(doctor.IdDoctores).subscribe();
   }
 
   updateDoctor(doctor: IUdoctores): void {

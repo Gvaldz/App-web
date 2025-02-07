@@ -19,7 +19,7 @@ export class PacientesCardsComponent implements OnInit {
   }
 
   deletePaciente(paciente: IUpacientes): void {
-    this.pacienteService.deletePaciente(paciente.idPacientes).subscribe();
+    this.pacienteService.deletePaciente(paciente.IdPatients).subscribe();
   }
 
   updatePaciente(paciente: IUpacientes): void {

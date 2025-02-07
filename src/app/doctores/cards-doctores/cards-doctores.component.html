@@ -1,11 +1,8 @@
 <div *ngFor="let doctor of doctores" class="card">
     <div id="information">
-        <h3>Dr. {{doctor.nombres}} {{doctor.apellidos}}</h3>
-        <p>Cédula profesional: {{doctor.cedula}}</p>
-        <p>Especialidad: {{doctor.especialidad}}</p>
-        <p>Horario: {{doctor.horario}}</p>
-        <p>Número teléfonico: {{doctor.telefono}}</p>
-        <p>Correo: {{doctor.correo}}</p>
+        <h3>Dr. {{doctor.Nombres}} {{doctor.Apellidos}}</h3>
+        <p>Cédula profesional: {{doctor.Cedula}}</p>
+        <p>Especialidad: {{doctor.Especialidad}}</p>
     </div>
     <div id="buttons">
         <button id="Editar" (click)="updateDoctor(doctor)">Editar</button>

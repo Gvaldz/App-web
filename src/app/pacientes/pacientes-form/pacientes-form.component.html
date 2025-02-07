@@ -5,7 +5,7 @@
       placeholder="Ingrese su nombre"
       type="text"
       name="nombre"
-      [(ngModel)]="pacienteTemp.nombres"
+      [(ngModel)]="pacienteTemp.Nombres"
       required
     ></app-field>
   
@@ -14,7 +14,7 @@
     placeholder="Ingrese su apellido"
     type="text"
     name="apellido"
-    [(ngModel)]="pacienteTemp.apellidos"
+    [(ngModel)]="pacienteTemp.Apellidos"
     required
   ></app-field>
 
@@ -23,7 +23,7 @@
       placeholder="Ingrese la fecha de nacimiento del paciente"
       type="date"
       name="edad"
-      [(ngModel)]="pacienteTemp.nacimiento"
+      [(ngModel)]="pacienteTemp.Nacimiento"
       required
     ></app-field>
 
@@ -32,7 +32,7 @@
     placeholder="Ingrese el peso del paciente"
     type="number"
     name="peso"
-    [(ngModel)]="pacienteTemp.peso"
+    [(ngModel)]="pacienteTemp.Peso"
     required
     ></app-field>
 
@@ -41,17 +41,8 @@
     placeholder="Ingrese la estatura del paciente"
     type="number"
     name="estatura"
-    [(ngModel)]="pacienteTemp.estatura"
+    [(ngModel)]="pacienteTemp.Estatura"
     required
-    ></app-field>
-  
-    <app-field
-      label="Teléfono"
-      placeholder="Ingrese su teléfono"
-      type="number"
-      name="telefono"
-      [(ngModel)]="pacienteTemp.telefono"
-      required
     ></app-field>
 
     <app-button-save></app-button-save>

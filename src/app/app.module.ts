@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-import { CitasModule } from './citas/citas.module';
 import { DoctoresModule } from './doctores/doctores.module';
 import PacientesModule from './pacientes/pacientes.module';
 import { SharedModule } from './shared/shared.module';
@@ -19,7 +18,6 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    CitasModule,
     DoctoresModule,
     PacientesModule,
     SharedModule,

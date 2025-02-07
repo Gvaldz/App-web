@@ -1,9 +1,8 @@
 export interface IUpacientes {
-    idPacientes: number
-    nombres: string,
-    apellidos: string,
-    nacimiento: any,
-    peso: any,
-    estatura: any,
-    telefono: any
+    IdPatients: number
+    Nombres: string,
+    Apellidos: string,
+    Nacimiento: any,
+    Peso: number,
+    Estatura: number,
 }

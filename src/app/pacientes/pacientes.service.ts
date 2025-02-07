@@ -7,7 +7,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class PacientesService {
-  private apiUrl = 'http://54.173.131.38:8080/api/pacientes';
+  
+  private apiUrl = 'http://127.0.0.1:8080/Patients';
   private selectedpaciente = new BehaviorSubject<IUpacientes | null>(null);
   selectedpaciente$ = this.selectedpaciente.asObservable();
   private pacientesSubject = new BehaviorSubject<IUpacientes[]>([]);
@@ -20,6 +21,7 @@ export class PacientesService {
   private loadPacientes() {
     this.getPacientes().subscribe(data => {
       this.pacientesSubject.next(data);
+      console.log(data);
     });
   }
 
@@ -46,7 +48,7 @@ export class PacientesService {
   deletePaciente(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`).pipe(
       tap(() => {
-        this.pacientesSubject.next(this.pacientesSubject.getValue().filter(p => p.idPacientes !== id));
+        this.pacientesSubject.next(this.pacientesSubject.getValue().filter(p => p.IdPatients !== id));
       })
     );
   }

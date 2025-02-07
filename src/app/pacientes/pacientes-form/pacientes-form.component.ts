@@ -11,13 +11,12 @@ import { DatePipe } from '@angular/common';
 })
 export class PacientesFormComponent implements OnInit {
   pacienteTemp: IUpacientes = {
-    idPacientes: 0,
-    nombres: '',
-    apellidos: '',
-    nacimiento: null,
-    peso: null,
-    estatura: null,
-    telefono: null
+    IdPatients: 0,
+    Nombres: '',
+    Apellidos: '',
+    Nacimiento: null,
+    Peso: 0,
+    Estatura: 0
   };
 
   isEditMode = false;
@@ -41,10 +40,13 @@ export class PacientesFormComponent implements OnInit {
 
   onSubmit() {
     if (this.validateForm()) {
-      this.pacienteTemp.nacimiento = this.datePipe.transform(this.pacienteTemp.nacimiento, 'yyyy-MM-dd') as string;
-
+      this.pacienteTemp.Nacimiento = this.datePipe.transform(this.pacienteTemp.Nacimiento, 'yyyy-MM-dd') as string;
+  
+      this.pacienteTemp.Peso = Number(this.pacienteTemp.Peso);
+      this.pacienteTemp.Estatura = Number(this.pacienteTemp.Estatura);
+  
       if (this.isEditMode) {
-        this.pacienteService.updatePaciente(this.pacienteTemp.idPacientes, this.pacienteTemp).subscribe(() => {
+        this.pacienteService.updatePaciente(this.pacienteTemp.IdPatients, this.pacienteTemp).subscribe(() => {
           this.resetForm();
         });
         this.isEditMode = false;
@@ -57,16 +59,16 @@ export class PacientesFormComponent implements OnInit {
       alert('Por favor completa todos los campos correctamente.');
     }
   }
+  
 
   validateForm(): boolean {
-    return this.pacienteTemp.nombres !== '' && this.pacienteTemp.apellidos !== '' &&
-           this.pacienteTemp.nacimiento !== null && this.pacienteTemp.peso >= 0 && 
-           this.pacienteTemp.estatura >= 0 && 
-           this.pacienteTemp.telefono && String(this.pacienteTemp.telefono).length === 10;
+    return this.pacienteTemp.Nombres !== '' && this.pacienteTemp.Apellidos !== '' &&
+           this.pacienteTemp.Nacimiento !== null && this.pacienteTemp.Peso >= 0 && 
+           this.pacienteTemp.Estatura >= 0  
   }
 
   resetForm(): void {
-    this.pacienteTemp = { idPacientes: 0 ,nombres: '', apellidos: '', nacimiento: null, peso: null, estatura: null, telefono: null };
+    this.pacienteTemp = { IdPatients: 0 , Nombres: '', Apellidos: '', Nacimiento: null, Peso: 0, Estatura: 0};
     this.isEditMode = false;
   }
 }
