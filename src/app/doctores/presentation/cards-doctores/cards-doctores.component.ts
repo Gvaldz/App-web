@@ -1,28 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { DoctoresSeviceService } from '../doctores-sevice.service';
-import { IUdoctores } from '../iudoctores';
+import { IUdoctores } from '../../domain/iudoctores';
+import { GestionDoctoresService } from '../../application/UseCases';
 
 @Component({
   selector: 'app-cards-doctores',
   templateUrl: './cards-doctores.component.html',
   styleUrls: ['./cards-doctores.component.css']
 })
+
+
 export class CardsDoctoresComponent implements OnInit {
   doctores: IUdoctores[] = [];
 
-  constructor(private doctorService: DoctoresSeviceService) {}
+  constructor(private gestionDoctores: GestionDoctoresService) {}
 
   ngOnInit(): void {
-    this.doctorService.doctores$.subscribe(data => {
+    this.gestionDoctores.obtenerDoctores().subscribe(data => {
       this.doctores = data;
     });
   }
 
   deleteDoctor(doctor: IUdoctores): void {
-    this.doctorService.deleteDoctor(doctor.IdDoctores).subscribe();
+    this.gestionDoctores.eliminarDoctor(doctor.IdDoctores).subscribe();
   }
 
   updateDoctor(doctor: IUdoctores): void {
-    this.doctorService.selectDoctorForEdit(doctor);
+    this.gestionDoctores.seleccionarDoctor(doctor); 
   }
 }

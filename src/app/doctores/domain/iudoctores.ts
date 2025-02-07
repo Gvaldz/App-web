@@ -3,5 +3,5 @@ export interface IUdoctores {
     Nombres : string,
     Apellidos : string,
     Especialidad : string,
-    Cedula : any,
+    Cedula : number,
 }

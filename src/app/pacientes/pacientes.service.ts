@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IUpacientes } from './iupacientes';
+import { IUpacientes } from './domain/iupacientes';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 

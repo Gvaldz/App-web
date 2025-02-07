@@ -8,6 +8,10 @@ import PacientesModule from './pacientes/pacientes.module';
 import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './shared/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
+import { GestionDoctoresService } from './doctores/application/UseCases';
+import { DoctoresRepository } from './doctores/domain/repository';
+import { DoctoresRepositoryImpl } from './doctores/infraestructure/repository';
+import { GestionPacientesService } from './pacientes/application/UseCases';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,12 @@ import { HttpClientModule } from '@angular/common/http';
     SharedModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    GestionDoctoresService,
+    { provide: DoctoresRepository, useClass: DoctoresRepositoryImpl },
+    GestionPacientesService,
+    { provide: DoctoresRepository, useClass: DoctoresRepositoryImpl }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

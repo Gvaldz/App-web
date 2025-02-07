@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrl: './doctores-dashboard.component.css',
   
 })
+
 export default class DoctoresDashboardComponent {
 }
