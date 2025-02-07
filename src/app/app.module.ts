@@ -12,6 +12,8 @@ import { GestionDoctoresService } from './doctores/application/UseCases';
 import { DoctoresRepository } from './doctores/domain/repository';
 import { DoctoresRepositoryImpl } from './doctores/infraestructure/repository';
 import { GestionPacientesService } from './pacientes/application/UseCases';
+import { PacientesRepository } from './pacientes/domain/repository';
+import { PacientesRepositoryImpl } from './pacientes/infraestructure/repository';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,7 @@ import { GestionPacientesService } from './pacientes/application/UseCases';
     GestionDoctoresService,
     { provide: DoctoresRepository, useClass: DoctoresRepositoryImpl },
     GestionPacientesService,
-    { provide: DoctoresRepository, useClass: DoctoresRepositoryImpl }
+    { provide: PacientesRepository, useClass: PacientesRepositoryImpl }
   ],
   bootstrap: [AppComponent]
 })

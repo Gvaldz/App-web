@@ -7,7 +7,7 @@ import { PacientesRepository } from '../domain/repository';
 @Injectable({ providedIn: 'root' })
 
 export class PacientesRepositoryImpl extends PacientesRepository {
-  private apiUrl = 'http://127.0.0.1:8080/Pacients';
+  private apiUrl = 'http://127.0.0.1:8080/patients';
   selectedPaciente$: any;
 
   constructor(private http: HttpClient) {
